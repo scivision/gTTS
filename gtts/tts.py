@@ -4,7 +4,7 @@ from gtts.utils import _minimize, _len, _clean_tokens, _translate_url
 from gtts.lang import tts_langs
 
 from gtts_token import gtts_token
-from six.moves import urllib
+import urllib
 import urllib3
 import requests
 import logging
@@ -322,7 +322,7 @@ class gTTSError(Exception):
 
             if tts.tld != 'com':
                 host = _translate_url(tld=tts.tld)
-                cause = "Host '{}' is not reachable".format(host)
+                cause = f"Host '{host}' is not reachable"
 
         else:
             # rsp should be <requests.Response>
@@ -330,7 +330,7 @@ class gTTSError(Exception):
             status = rsp.status_code
             reason = rsp.reason
 
-            premise = "{:d} ({}) from TTS API".format(status, reason)
+            premise = f"{status:d} ({reason}) from TTS API"
 
             if status == 403:
                 cause = "Bad token or upstream API changes"
@@ -339,4 +339,4 @@ class gTTSError(Exception):
             elif status >= 500:
                 cause = "Uptream API error. Try again later."
 
-        return "{}. Probable cause: {}".format(premise, cause)
+        return f"{premise}. Probable cause: {cause}"

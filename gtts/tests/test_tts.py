@@ -2,7 +2,7 @@
 import os
 import pytest
 from mock import Mock
-from six.moves import urllib
+import urllib
 
 from gtts.tts import gTTS, gTTSError
 from gtts.lang import _fetch_langs, _extra_langs
@@ -33,7 +33,7 @@ elif env == 'fetch':
 elif env == 'extra':
     langs = _extra_langs()
 else:
-    env_langs = {l: l for l in env.split(',') if l}
+    env_langs = {k: k for k in env.split(',') if k}
     langs = env_langs
 
 
@@ -44,7 +44,7 @@ def test_TTS(tmp_path, lang):
     text = "This is a test"
     """Create output .mp3 file successfully"""
     for slow in (False, True):
-        filename = tmp_path / 'test_{}_.mp3'.format(lang)
+        filename = tmp_path / f'test_{lang}_.mp3'
         # Create gTTS and save
         tts = gTTS(text=text, lang=lang, slow=slow)
         tts.save(filename)

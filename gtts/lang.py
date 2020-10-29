@@ -36,13 +36,13 @@ def tts_langs(tld="com"):
     """
     try:
         langs = dict()
-        log.debug("Fetching with '{}' tld".format(tld))
+        log.debug(f"Fetching with '{tld}' tld")
         langs.update(_fetch_langs(tld))
         langs.update(_extra_langs())
-        log.debug("langs: {}".format(langs))
+        log.debug(f"langs: {langs}")
         return langs
     except Exception as e:
-        raise RuntimeError("Unable to get language list: {}".format(str(e)))
+        raise RuntimeError(f"Unable to get language list: {e}")
 
 
 def _fetch_langs(tld="com"):
@@ -79,7 +79,7 @@ def _fetch_langs(tld="com"):
     # The <script src=''> path can change, but not the file.
     # Ex: /zyx/abc/20180211/translate_m.js
     js_path = soup.find(src=re.compile(JS_FILE))['src']
-    js_url = "{}/{}".format(URL_BASE, js_path)
+    js_url = f"{URL_BASE}/{js_path}"
 
     # Load JavaScript
     js_contents = requests.get(js_url).text
