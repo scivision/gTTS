@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-import pytest
 from gtts.utils import _minimize, _len, _clean_tokens, _translate_url
 
 delim = ' '
@@ -19,8 +17,8 @@ def test_ascii_no_delim():
 
 
 def test_unicode():
-    _in = u"这是一个三岁的小孩在讲述他从一系列照片里看到的东西。"
-    _out = [u"这是一个三岁的小孩在", u"讲述他从一系列照片里", u"看到的东西。"]
+    _in = "这是一个三岁的小孩在讲述他从一系列照片里看到的东西。"
+    _out = ["这是一个三岁的小孩在", "讲述他从一系列照片里", "看到的东西。"]
     assert _minimize(_in, delim, Lmax) == _out
 
 
@@ -56,7 +54,3 @@ def test_translate_url():
     _in = {"tld": "qwerty", "path": "asdf"}
     _out = "https://translate.google.qwerty/asdf"
     assert _translate_url(**_in) == _out
-
-
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])

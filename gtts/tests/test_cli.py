@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-import pytest
 import re
 import os
 from click.testing import CliRunner
@@ -135,7 +133,7 @@ test
 123"""
 
 # Text for stdin ('-' for <text> or <file>) (Unicode)
-textstdin_unicode = u"""你吃饭了吗？
+textstdin_unicode = """你吃饭了吗？
 你最喜欢哪部电影？
 我饿了，我要去做饭了。"""
 
@@ -146,7 +144,7 @@ How much will it cost the website doesn't have the theme i was going for."""
 textfile_ascii = os.path.join(pwd, 'input_files', 'test_cli_test_ascii.txt')
 
 # Text for <text> and <file> (Unicode)
-text_unicode = u"""这是一个三岁的小孩
+text_unicode = """这是一个三岁的小孩
 在讲述她从一系列照片里看到的东西。
 对这个世界， 她也许还有很多要学的东西，
 但在一个重要的任务上， 她已经是专家了：
@@ -165,7 +163,7 @@ def logcapture_str(lc):
     if not lc.records:
         return 'No logging captured'
 
-    return '\n'.join([u"%s %s\n  %s" % r for r in lc.actual()])
+    return '\n'.join(["%s %s\n  %s" % r for r in lc.actual()])
 
 
 def test_stdin_text():
@@ -182,7 +180,7 @@ def test_stdin_text_unicode():
         result = runner_debug(['-'], textstdin_unicode)
         log = logcapture_str(lc)
 
-    assert u'text: %s' % textstdin_unicode in log
+    assert 'text: %s' % textstdin_unicode in log
     assert result.exit_code == 0
 
 
@@ -256,7 +254,3 @@ def test_file(tmp_path):
     # Check if files created is > 2k
     assert filename.stat().st_size > 2000
     assert result.exit_code == 0
-
-
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])

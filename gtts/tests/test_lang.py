@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pytest
 from gtts.lang import tts_langs, _fetch_langs, _extra_langs
 
@@ -27,7 +26,3 @@ def test_fetch_langs_exception():
     """Raise RuntimeError on language fetch exception"""
     with pytest.raises(RuntimeError):
         tts_langs(tld="invalid")
-
-
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])

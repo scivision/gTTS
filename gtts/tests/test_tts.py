@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import pytest
 from mock import Mock
@@ -175,7 +174,3 @@ def test_WebRequest(tmp_path):
         # Create gTTS
         tts = gTTS(text=text, lang=lang, lang_check=check)
         tts.save(filename)
-
-
-if __name__ == '__main__':
-    pytest.main(['-x', __file__])
